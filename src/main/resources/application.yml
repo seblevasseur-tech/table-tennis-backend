@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: table-tennis-backend
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:tabletennisdb}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
