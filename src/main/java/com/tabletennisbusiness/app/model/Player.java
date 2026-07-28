@@ -1,10 +1,7 @@
 package com.tabletennisbusiness.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "players")
@@ -14,39 +11,45 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
+    private String forname;
+
+    @NotNull
     private Integer rating;
+
+    @NotNull
+    private String avatar;
 
     public Player() {
     }
 
-    public Player(String name, Integer rating) {
+    public Player(String name, String forname, Integer rating, String avatar) {
         this.name = name;
+        this.forname = forname;
         this.rating = rating;
+        this.avatar = avatar;
     }
 
-    public Long getId() {
+    public Long id() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String forname() {
+        return forname;
     }
 
-    public Integer getRating() {
+    public Integer rating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
+    public String avatar() {
+        return avatar;
     }
 }
