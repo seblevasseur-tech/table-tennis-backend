@@ -29,6 +29,7 @@ public class PlayerApplicationService {
 
     public Player addPlayer(AddPlayerCommand command) {
         try {
+            System.out.println(command);
             Player player = new Player(command.name(), command.forname(), command.rating(), Arrays.toString(command.avatarFile().getBytes()));
             return playerJpaRepository.save(player);
         } catch (IOException e) {
