@@ -16,13 +16,13 @@ public class AddPlayerCommand {
     private Integer rating;
 
     @Lob
-    MultipartFile avatarFile;
+    MultipartFile avatar;
 
-    public AddPlayerCommand(String name, String forname, Integer rating, MultipartFile avatarFile) {
+    public AddPlayerCommand(String name, String forname, Integer rating, MultipartFile avatar) {
         this.name = name;
         this.forname = forname;
         this.rating = rating;
-        this.avatarFile = avatarFile;
+        this.avatar = avatar;
     }
 
     public String name() {
@@ -37,7 +37,7 @@ public class AddPlayerCommand {
         return rating;
     }
 
-    public MultipartFile avatarFile() {
-        return avatarFile;
+    public MultipartFile avatar() {
+        return avatar;
     }
 }

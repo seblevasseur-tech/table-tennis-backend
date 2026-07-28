@@ -29,7 +29,7 @@ public class PlayerApplicationService {
 
     public Player addPlayer(AddPlayerCommand command) {
         try {
-            Player player = new Player(command.name(), command.forname(), command.rating(), Arrays.toString(command.avatarFile().getBytes()));
+            Player player = new Player(command.name(), command.forname(), command.rating(), Arrays.toString(command.avatar().getBytes()));
             return playerJpaRepository.save(player);
         } catch (IOException e) {
             throw new RuntimeException(e);
