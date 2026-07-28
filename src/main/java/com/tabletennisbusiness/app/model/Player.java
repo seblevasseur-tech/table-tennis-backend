@@ -20,7 +20,8 @@ public class Player {
     @NotNull
     private Integer rating;
 
-    @NotNull
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String avatar;
 
     public Player() {
