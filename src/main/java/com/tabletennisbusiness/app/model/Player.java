@@ -34,23 +34,23 @@ public class Player {
         this.avatar = avatar;
     }
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public String forname() {
+    public String getForname() {
         return forname;
     }
 
-    public Integer rating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public String avatar() {
+    public String getAvatar() {
         return avatar;
     }
 }
