@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -28,11 +29,28 @@ public class PlayerApplicationService {
     }
 
     public Player addPlayer(AddPlayerCommand command) {
-        try {
-            Player player = new Player(command.name(), command.forname(), command.rating(), Arrays.toString(command.avatar().getBytes()));
-            return playerJpaRepository.save(player);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        String avatarBase64 = null;
+
+        // 1. Vérification contre le NullPointerException
+        if (command.avatar() != null && !command.avatar().isEmpty()) {
+            try {
+                byte[] bytes = command.avatar().getBytes();
+                String contentType = command.avatar().getContentType(); // ex: image/png, image/jpeg
+
+                // 2. Formatage en Data URI Base64 lisible directement par Angular
+                avatarBase64 = "data:" + contentType + ";base64," + Base64.getEncoder().encodeToString(bytes);
+            } catch (IOException e) {
+                throw new RuntimeException("Erreur lors du traitement de l'image avatar", e);
+            }
         }
+
+        Player player = new Player(
+                command.name(),
+                command.forname(),
+                command.rating(),
+                avatarBase64
+        );
+
+        return playerJpaRepository.save(player);
     }
 }

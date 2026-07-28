@@ -3,6 +3,7 @@ package com.tabletennisbusiness.app.presentation;
 import com.tabletennisbusiness.app.application.PlayerApplicationService;
 import com.tabletennisbusiness.app.application.data.AddPlayerCommand;
 import com.tabletennisbusiness.app.model.Player;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class PlayerController {
     }
 
 
-    @PostMapping
-    public Player createPlayer(@RequestBody AddPlayerCommand command) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Player createPlayer(@ModelAttribute AddPlayerCommand command) {
         return playerApplicationService.addPlayer(command);
     }
 
