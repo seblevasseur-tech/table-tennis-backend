@@ -66,6 +66,7 @@ public class PlayerApplicationService {
                 command.name(),
                 command.forname(),
                 command.handedness(),
+                command.countryCode(),
                 blade,
                 forehandRubber,
                 backhandRubber,

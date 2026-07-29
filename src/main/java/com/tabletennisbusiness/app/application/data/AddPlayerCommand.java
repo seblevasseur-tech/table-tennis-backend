@@ -10,6 +10,7 @@ public record AddPlayerCommand(
         @NotBlank String name,
         @NotBlank String forname,
         @NotNull Handedness handedness,
+        @NotBlank String countryCode,
         @NotNull Long bladeId,
         @NotNull Long forehandRubberId,
         @NotNull Long backhandRubberId,

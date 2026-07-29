@@ -21,6 +21,9 @@ public class Player {
     @NotNull
     private Handedness handedness;
 
+    @NotNull
+    private String countryCode;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "blade_id", nullable = false)
     private Blade blade;
@@ -44,10 +47,11 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, String forname, Handedness handedness, Blade blade, Rubber forehandRubber, Rubber backhandRubber, String information, String avatar) {
+    public Player(String name, String forname, Handedness handedness, String countryCode, Blade blade, Rubber forehandRubber, Rubber backhandRubber, String information, String avatar) {
         this.name = name;
         this.forname = forname;
         this.handedness = handedness;
+        this.countryCode = countryCode;
         this.blade = blade;
         this.forehandRubber = forehandRubber;
         this.backhandRubber = backhandRubber;
@@ -69,6 +73,10 @@ public class Player {
 
     public Handedness getHandedness() {
         return handedness;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
     }
 
     public Blade getBlade() {
