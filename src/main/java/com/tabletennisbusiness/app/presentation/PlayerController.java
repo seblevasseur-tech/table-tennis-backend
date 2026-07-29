@@ -38,6 +38,16 @@ public class PlayerController {
         return playerApplicationService.addPlayer(command);
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Player updatePlayer(@PathVariable Long id, @Valid @ModelAttribute AddPlayerCommand command) {
+        return playerApplicationService.updatePlayer(id, command);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePlayer(@PathVariable Long id) {
+        playerApplicationService.deletePlayer(id);
+    }
+
 //    @GetMapping("/{id}")
 //    public Optional<Player> getPlayerById(@PathVariable Long id) {
 //        return playerRepository.findById(id);

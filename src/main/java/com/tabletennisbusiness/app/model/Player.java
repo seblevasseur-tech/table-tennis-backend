@@ -22,6 +22,7 @@ public class Player {
     private Handedness handedness;
 
     @NotNull
+    @Column(name = "countrycode", nullable = false)
     private String countryCode;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -91,6 +92,50 @@ public class Player {
 
     public String getInformation() {
         return information;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public void setForname(String forname) {
+        this.forname = forname;
+    }
+
+
+    public void setHandedness(Handedness handedness) {
+        this.handedness = handedness;
+    }
+
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+
+    public void setBlade(Blade blade) {
+        this.blade = blade;
+    }
+
+
+    public void setForehandRubber(Rubber forehandRubber) {
+        this.forehandRubber = forehandRubber;
+    }
+
+
+    public void setBackhandRubber(Rubber backhandRubber) {
+        this.backhandRubber = backhandRubber;
+    }
+
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getAvatar() {

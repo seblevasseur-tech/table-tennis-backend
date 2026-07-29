@@ -49,6 +49,25 @@ public class Rubber {
         return information;
     }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getAvatar() {
         return avatar;
     }

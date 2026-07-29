@@ -32,6 +32,22 @@ public class RubberApplicationService {
         return rubberJpaRepository.findById(id);
     }
 
+    public Rubber updateRubber(Long id, AddRubberCommand command) {
+        Rubber rubber = rubberJpaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Revêtement introuvable"));
+        rubber.setBrand(command.brand());
+        rubber.setName(command.name());
+        rubber.setInformation(command.information());
+        if (command.avatar() != null && !command.avatar().isEmpty()) {
+            rubber.setAvatar(encodeAvatar(command.avatar()));
+        }
+        return rubberJpaRepository.save(rubber);
+    }
+
+    public void deleteRubber(Long id) {
+        rubberJpaRepository.deleteById(id);
+    }
+
     public Rubber addRubber(AddRubberCommand command) {
         String avatarBase64 = null;
 
@@ -56,5 +72,13 @@ public class RubberApplicationService {
         );
 
         return rubberJpaRepository.save(rubber);
+    }
+
+    private String encodeAvatar(org.springframework.web.multipart.MultipartFile avatar) {
+        try {
+            return "data:" + avatar.getContentType() + ";base64," + Base64.getEncoder().encodeToString(avatar.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors du traitement de l'image avatar", e);
+        }
     }
 }

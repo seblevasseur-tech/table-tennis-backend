@@ -4,6 +4,7 @@ import com.tabletennisbusiness.app.application.RubberApplicationService;
 import com.tabletennisbusiness.app.application.data.AddRubberCommand;
 import com.tabletennisbusiness.app.model.Rubber;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,16 @@ public class RubberController {
         return rubberApplicationService.findRubber(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Rubber updateRubber(@PathVariable Long id, @Valid @ModelAttribute AddRubberCommand command) {
+        return rubberApplicationService.updateRubber(id, command);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRubber(@PathVariable Long id) {
+        rubberApplicationService.deleteRubber(id);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

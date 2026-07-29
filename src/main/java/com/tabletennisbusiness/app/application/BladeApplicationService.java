@@ -32,6 +32,22 @@ public class BladeApplicationService {
         return bladeJpaRepository.findById(id);
     }
 
+    public Blade updateBlade(Long id, AddBladeCommand command) {
+        Blade blade = bladeJpaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Bois introuvable"));
+        blade.setBrand(command.brand());
+        blade.setName(command.name());
+        blade.setInformation(command.information());
+        if (command.avatar() != null && !command.avatar().isEmpty()) {
+            blade.setAvatar(encodeAvatar(command.avatar()));
+        }
+        return bladeJpaRepository.save(blade);
+    }
+
+    public void deleteBlade(Long id) {
+        bladeJpaRepository.deleteById(id);
+    }
+
     public Blade addBlade(AddBladeCommand command) {
         String avatarBase64 = null;
 
@@ -56,5 +72,13 @@ public class BladeApplicationService {
         );
 
         return bladeJpaRepository.save(blade);
+    }
+
+    private String encodeAvatar(org.springframework.web.multipart.MultipartFile avatar) {
+        try {
+            return "data:" + avatar.getContentType() + ";base64," + Base64.getEncoder().encodeToString(avatar.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors du traitement de l'image avatar", e);
+        }
     }
 }

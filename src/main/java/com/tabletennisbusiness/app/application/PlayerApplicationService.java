@@ -39,6 +39,30 @@ public class PlayerApplicationService {
         return playerJpaRepository.findById(id);
     }
 
+    public Player updatePlayer(Long id, AddPlayerCommand command) {
+        Player player = playerJpaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Joueur introuvable"));
+        player.setName(command.name());
+        player.setForname(command.forname());
+        player.setHandedness(command.handedness());
+        player.setCountryCode(command.countryCode());
+        player.setInformation(command.information());
+        player.setBlade(bladeJpaRepository.findById(command.bladeId())
+                .orElseThrow(() -> new IllegalArgumentException("Bois introuvable")));
+        player.setForehandRubber(rubberJpaRepository.findById(command.forehandRubberId())
+                .orElseThrow(() -> new IllegalArgumentException("Revêtement coup droit introuvable")));
+        player.setBackhandRubber(rubberJpaRepository.findById(command.backhandRubberId())
+                .orElseThrow(() -> new IllegalArgumentException("Revêtement revers introuvable")));
+        if (command.avatar() != null && !command.avatar().isEmpty()) {
+            player.setAvatar(encodeAvatar(command.avatar()));
+        }
+        return playerJpaRepository.save(player);
+    }
+
+    public void deletePlayer(Long id) {
+        playerJpaRepository.deleteById(id);
+    }
+
     public Player addPlayer(AddPlayerCommand command) {
         String avatarBase64 = null;
 
@@ -75,5 +99,13 @@ public class PlayerApplicationService {
         );
 
         return playerJpaRepository.save(player);
+    }
+
+    private String encodeAvatar(org.springframework.web.multipart.MultipartFile avatar) {
+        try {
+            return "data:" + avatar.getContentType() + ";base64," + Base64.getEncoder().encodeToString(avatar.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors du traitement de l'image avatar", e);
+        }
     }
 }
