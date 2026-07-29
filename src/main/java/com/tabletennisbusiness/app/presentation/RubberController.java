@@ -5,6 +5,7 @@ import com.tabletennisbusiness.app.application.data.AddRubberCommand;
 import com.tabletennisbusiness.app.model.Rubber;
 import jakarta.inject.Inject;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,13 @@ public class RubberController {
         return rubberApplicationService.searchRubbers();
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Rubber> getRubberById(@PathVariable Long id) {
+        return rubberApplicationService.findRubber(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Rubber createRubber(@ModelAttribute AddRubberCommand command) {

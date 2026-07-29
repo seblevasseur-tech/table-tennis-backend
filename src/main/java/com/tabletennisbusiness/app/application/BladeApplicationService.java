@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,6 +26,10 @@ public class BladeApplicationService {
 
     public List<Blade> searchBlades() {
         return bladeJpaRepository.findAll();
+    }
+
+    public Optional<Blade> findBlade(Long id) {
+        return bladeJpaRepository.findById(id);
     }
 
     public Blade addBlade(AddBladeCommand command) {

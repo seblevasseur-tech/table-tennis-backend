@@ -9,6 +9,7 @@ import com.tabletennisbusiness.app.model.Player;
 import jakarta.inject.Inject;
 import jdk.jshell.spi.ExecutionControl;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,13 @@ public class BladeController {
         return bladeApplicationService.searchBlades();
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Blade> getBladeById(@PathVariable Long id) {
+        return bladeApplicationService.findBlade(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Blade createBlade(@ModelAttribute AddBladeCommand command) {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,6 +26,10 @@ public class RubberApplicationService {
 
     public List<Rubber> searchRubbers() {
         return rubberJpaRepository.findAll();
+    }
+
+    public Optional<Rubber> findRubber(Long id) {
+        return rubberJpaRepository.findById(id);
     }
 
     public Rubber addRubber(AddRubberCommand command) {
