@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +33,10 @@ public class PlayerApplicationService {
 
     public List<Player> searchPlayers() {
         return playerJpaRepository.findAll();
+    }
+
+    public Optional<Player> findPlayer(Long id) {
+        return playerJpaRepository.findById(id);
     }
 
     public Player addPlayer(AddPlayerCommand command) {
