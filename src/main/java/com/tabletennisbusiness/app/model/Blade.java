@@ -19,14 +19,19 @@ public class Blade {
 
     @Lob
     @Column(columnDefinition = "TEXT")
+    private String information;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String avatar;
 
     public Blade() {
     }
 
-    public Blade(String brand, String name, String avatar) {
+    public Blade(String brand, String name, String information, String avatar) {
         this.brand = brand;
         this.name = name;
+        this.information = information;
         this.avatar = avatar;
     }
 
@@ -40,6 +45,10 @@ public class Blade {
 
     public String getName() {
         return name;
+    }
+
+    public String getInformation() {
+        return information;
     }
 
     public String getAvatar() {

@@ -46,6 +46,7 @@ public class BladeApplicationService {
         Blade blade = new Blade(
                 command.brand(),
                 command.name(),
+                command.information(),
                 avatarBase64
         );
 

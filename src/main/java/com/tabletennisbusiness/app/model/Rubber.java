@@ -19,14 +19,19 @@ public class Rubber {
 
     @Lob
     @Column(columnDefinition = "TEXT")
+    private String information;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String avatar;
 
     public Rubber() {
     }
 
-    public Rubber(String brand, String name, String avatar) {
+    public Rubber(String brand, String name, String information, String avatar) {
         this.brand = brand;
         this.name = name;
+        this.information = information;
         this.avatar = avatar;
     }
 
@@ -40,6 +45,10 @@ public class Rubber {
 
     public String getName() {
         return name;
+    }
+
+    public String getInformation() {
+        return information;
     }
 
     public String getAvatar() {

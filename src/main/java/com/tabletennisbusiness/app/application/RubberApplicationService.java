@@ -46,6 +46,7 @@ public class RubberApplicationService {
         Rubber rubber = new Rubber(
                 command.brand(),
                 command.name(),
+                command.information(),
                 avatarBase64
         );
 

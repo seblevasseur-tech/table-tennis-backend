@@ -64,6 +64,7 @@ public class PlayerApplicationService {
                 blade,
                 forehandRubber,
                 backhandRubber,
+                command.information(),
                 avatarBase64
         );
 

@@ -35,18 +35,23 @@ public class Player {
 
     @Lob
     @Column(columnDefinition = "TEXT")
+    private String information;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String avatar;
 
     public Player() {
     }
 
-    public Player(String name, String forname, Handedness handedness, Blade blade, Rubber forehandRubber, Rubber backhandRubber, String avatar) {
+    public Player(String name, String forname, Handedness handedness, Blade blade, Rubber forehandRubber, Rubber backhandRubber, String information, String avatar) {
         this.name = name;
         this.forname = forname;
         this.handedness = handedness;
         this.blade = blade;
         this.forehandRubber = forehandRubber;
         this.backhandRubber = backhandRubber;
+        this.information = information;
         this.avatar = avatar;
     }
 
@@ -76,6 +81,10 @@ public class Player {
 
     public Rubber getBackhandRubber() {
         return backhandRubber;
+    }
+
+    public String getInformation() {
+        return information;
     }
 
     public String getAvatar() {

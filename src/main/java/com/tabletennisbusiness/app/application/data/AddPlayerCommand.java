@@ -13,5 +13,6 @@ public record AddPlayerCommand(
         @NotNull Long bladeId,
         @NotNull Long forehandRubberId,
         @NotNull Long backhandRubberId,
+        String information,
         MultipartFile avatar
 ) {}

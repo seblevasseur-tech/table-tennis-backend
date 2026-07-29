@@ -6,5 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 public record AddRubberCommand(
         @NotNull String brand,
         @NotNull String name,
+        String information,
         MultipartFile avatar
 ) {}
