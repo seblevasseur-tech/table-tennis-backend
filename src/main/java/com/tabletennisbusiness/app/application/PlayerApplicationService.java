@@ -3,13 +3,15 @@ package com.tabletennisbusiness.app.application;
 import com.tabletennisbusiness.app.application.data.AddPlayerCommand;
 import com.tabletennisbusiness.app.model.Player;
 import com.tabletennisbusiness.app.infrastructure.PlayerJpaRepository;
+import com.tabletennisbusiness.app.infrastructure.BladeJpaRepository;
+import com.tabletennisbusiness.app.infrastructure.RubberJpaRepository;
+import com.tabletennisbusiness.app.model.Blade;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -18,10 +20,14 @@ import java.util.List;
 public class PlayerApplicationService {
 
     private final PlayerJpaRepository playerJpaRepository;
+    private final BladeJpaRepository bladeJpaRepository;
+    private final RubberJpaRepository rubberJpaRepository;
 
     @Inject
-    public PlayerApplicationService(PlayerJpaRepository playerJpaRepository) {
+    public PlayerApplicationService(PlayerJpaRepository playerJpaRepository, BladeJpaRepository bladeJpaRepository, RubberJpaRepository rubberJpaRepository) {
         this.playerJpaRepository = playerJpaRepository;
+        this.bladeJpaRepository = bladeJpaRepository;
+        this.rubberJpaRepository = rubberJpaRepository;
     }
 
     public List<Player> searchPlayers() {
@@ -44,10 +50,20 @@ public class PlayerApplicationService {
             }
         }
 
+        Blade blade = bladeJpaRepository.findById(command.bladeId())
+                .orElseThrow(() -> new IllegalArgumentException("Bois introuvable"));
+        var forehandRubber = rubberJpaRepository.findById(command.forehandRubberId())
+                .orElseThrow(() -> new IllegalArgumentException("Revêtement coup droit introuvable"));
+        var backhandRubber = rubberJpaRepository.findById(command.backhandRubberId())
+                .orElseThrow(() -> new IllegalArgumentException("Revêtement revers introuvable"));
+
         Player player = new Player(
                 command.name(),
                 command.forname(),
-                command.rating(),
+                command.handedness(),
+                blade,
+                forehandRubber,
+                backhandRubber,
                 avatarBase64
         );
 

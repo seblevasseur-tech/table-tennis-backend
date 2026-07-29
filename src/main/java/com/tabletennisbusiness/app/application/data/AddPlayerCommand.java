@@ -1,11 +1,17 @@
 package com.tabletennisbusiness.app.application.data;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tabletennisbusiness.app.model.Handedness;
+
 public record AddPlayerCommand(
-        @NotNull String name,
-        @NotNull String forname,
-        @NotNull Integer rating,
+        @NotBlank String name,
+        @NotBlank String forname,
+        @NotNull Handedness handedness,
+        @NotNull Long bladeId,
+        @NotNull Long forehandRubberId,
+        @NotNull Long backhandRubberId,
         MultipartFile avatar
 ) {}

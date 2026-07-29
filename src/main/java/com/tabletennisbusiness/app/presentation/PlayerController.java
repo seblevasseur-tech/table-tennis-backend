@@ -4,6 +4,7 @@ import com.tabletennisbusiness.app.application.PlayerApplicationService;
 import com.tabletennisbusiness.app.application.data.AddPlayerCommand;
 import com.tabletennisbusiness.app.model.Player;
 import org.springframework.http.MediaType;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class PlayerController {
 
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Player createPlayer(@ModelAttribute AddPlayerCommand command) {
+    public Player createPlayer(@Valid @ModelAttribute AddPlayerCommand command) {
         return playerApplicationService.addPlayer(command);
     }
 
