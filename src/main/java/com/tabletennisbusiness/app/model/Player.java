@@ -22,7 +22,7 @@ public class Player {
     private Handedness handedness;
 
     @NotNull
-    @Column(name = "countrycode", nullable = false)
+    @Column(name = "country_code", nullable = false)
     private String countryCode;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
