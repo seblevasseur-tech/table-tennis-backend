@@ -17,11 +17,9 @@ public class Rubber {
     @NotNull
     private String name;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String information;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String avatar;
 

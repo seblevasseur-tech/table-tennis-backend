@@ -36,11 +36,9 @@ public class Player {
     @JoinColumn(name = "backhand_rubber_id", nullable = false)
     private Rubber backhandRubber;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String information;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String avatar;
 
